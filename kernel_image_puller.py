@@ -7,7 +7,7 @@ import time
 from threading import Thread
  
 cri_sock = os.getenv("KIP_CRI_SOCK", "unix:///var/run/containerd/containerd.sock")
-cri_client = os.getenv("KIP_CRI_CLI", True)
+cri_client = os.getenv("KIP_CRI_CLI", False)
 gateway_host = os.getenv("KIP_GATEWAY_HOST", "http://localhost:8888")
 num_pullers = int(os.getenv("KIP_NUM_PULLERS", "2"))
 num_retries = int(os.getenv("KIP_NUM_RETRIES", "3"))
@@ -20,7 +20,7 @@ policies = (POLICY_IF_NOT_PRESENT, POLICY_ALYWAYS)
  
 policy = os.getenv("KIP_PULL_POLICY", POLICY_IF_NOT_PRESENT)
  
-if cri_client:
+if cri_client or cri_client in ('Yes', 'yes', 'True', 'true'):
   from docker.errors import NotFound
   from cri_api.channel import Channel
   from cri_api.images import Images
