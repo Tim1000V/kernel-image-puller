@@ -104,7 +104,7 @@ def fetch_image_names():
                     image_name = config.get('image_name')
                     if image_name is not None:
                         images.add(image_name)
-                   executor_image_name = config.get('executor_image_name')
+                    executor_image_name = config.get('executor_image_name')
                     if executor_image_name is not None:
                         images.add(executor_image_name)
  
@@ -169,7 +169,7 @@ def puller():
         while i < num_retries:
             try:
                pull_image(image_name)
-                break
+               break
             except APIError as ex:
                 i += 1
                 if i < num_retries:
